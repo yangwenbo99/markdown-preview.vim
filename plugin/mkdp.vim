@@ -44,7 +44,9 @@ if !exists('g:mkdp_command_for_global')
 endif
 
 function! MKDP_browserfunc_default(url)
-    if has("win32") || has("win64")
+    if has("win32unix") || has("win32unix") 
+        execute "silent cygstart " . a:url . '.html'
+	else if has("win32") || has("win64")
         " windows
         execute "silent !cmd /c start " . a:url . '.html'
     elseif has("unix")
